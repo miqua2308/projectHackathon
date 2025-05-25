@@ -22,7 +22,8 @@ const app = express();
 const allowedOrigins = [
   process.env.CLIENT_URL || "http://localhost:3000",
   "http://localhost:5173", 
-  "*"
+  "http://*",
+  "https://project-hackathon-cjsh-8x497tjnc-miqua2004s-projects.vercel.app/"
 ];
 
 app.use(
