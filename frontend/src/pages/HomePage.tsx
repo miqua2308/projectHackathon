@@ -16,6 +16,7 @@ import SearchSection from "../components/SearchSection";
 import JobDetailsModal from "../components/JobDetailsModal";
 
 interface Job {
+  _id: string;  // Add this field
   title: string;
   skills: string[];
   budget: string;
@@ -35,6 +36,7 @@ const HomePage: React.FC = () => {
     // Initialize jobs data
     const initialJobs: Job[] = [
       {
+        _id: "1",  // Add an ID
         title: "Solana dApp Developer",
         skills: ["Rust", "Solana", "React"],
         budget: "0.3-0.5 SOL",
@@ -42,7 +44,7 @@ const HomePage: React.FC = () => {
         image:
           "https://readdy.ai/api/search-image?query=Abstract%20digital%20representation%20of%20blockchain%20development%20with%20code%20elements%20and%20Solana%20logo%2C%20professional%20tech%20illustration%20with%20clean%20minimal%20background%2C%20high%20quality%203D%20render%20with%20subtle%20lighting&width=400&height=250&seq=2&orientation=landscape",
       },
-      {
+      {_id: "2",
         title: "NFT Collection Designer",
         skills: ["Illustration", "NFT", "Blockchain"],
         budget: "0.4-0.7 SOL",
@@ -50,7 +52,7 @@ const HomePage: React.FC = () => {
         image:
           "https://readdy.ai/api/search-image?query=Modern%20digital%20art%20creation%20studio%20with%20NFT%20artwork%20displays%2C%20professional%20creative%20workspace%20with%20digital%20tablets%20and%20screens%20showing%20colorful%20abstract%20designs%2C%20clean%20minimal%20background%20with%20subtle%20lighting&width=400&height=250&seq=3&orientation=landscape",
       },
-      {
+      {_id: "3",
         title: "Smart Contract Auditor",
         skills: ["Security", "Solidity", "Audit"],
         budget: "0.6-1.0 SOL",
@@ -58,7 +60,7 @@ const HomePage: React.FC = () => {
         image:
           "https://readdy.ai/api/search-image?query=Cybersecurity%20concept%20with%20digital%20locks%20and%20code%20inspection%2C%20professional%20tech%20security%20visualization%20with%20blockchain%20elements%2C%20clean%20minimal%20background%20with%20blue%20digital%20elements&width=400&height=250&seq=4&orientation=landscape",
       },
-      {
+      {_id: "4",
         title: "Web3 Marketing Specialist",
         skills: ["Marketing", "Discord", "Web3"],
         budget: "0.3-0.6 SOL",
@@ -335,7 +337,7 @@ const HomePage: React.FC = () => {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              {
+              {_id: "1",
                 title: "Solana dApp Developer",
                 skills: ["Rust", "Solana", "React"],
                 budget: "0.3-0.5 SOL",
@@ -343,7 +345,7 @@ const HomePage: React.FC = () => {
                 image:
                   "https://readdy.ai/api/search-image?query=Abstract%20digital%20representation%20of%20blockchain%20development%20with%20code%20elements%20and%20Solana%20logo%2C%20professional%20tech%20illustration%20with%20clean%20minimal%20background%2C%20high%20quality%203D%20render%20with%20subtle%20lighting&width=400&height=250&seq=2&orientation=landscape",
               },
-              {
+              {_id: "2",
                 title: "NFT Collection Designer",
                 skills: ["Illustration", "NFT", "Blockchain"],
                 budget: "0.4-0.7 SOL",
@@ -351,7 +353,7 @@ const HomePage: React.FC = () => {
                 image:
                   "https://readdy.ai/api/search-image?query=Modern%20digital%20art%20creation%20studio%20with%20NFT%20artwork%20displays%2C%20professional%20creative%20workspace%20with%20digital%20tablets%20and%20screens%20showing%20colorful%20abstract%20designs%2C%20clean%20minimal%20background%20with%20subtle%20lighting&width=400&height=250&seq=3&orientation=landscape",
               },
-              {
+              {_id: "3",
                 title: "Smart Contract Auditor",
                 skills: ["Security", "Solidity", "Audit"],
                 budget: "0.6-1.0 SOL",
@@ -359,7 +361,7 @@ const HomePage: React.FC = () => {
                 image:
                   "https://readdy.ai/api/search-image?query=Cybersecurity%20concept%20with%20digital%20locks%20and%20code%20inspection%2C%20professional%20tech%20security%20visualization%20with%20blockchain%20elements%2C%20clean%20minimal%20background%20with%20blue%20digital%20elements&width=400&height=250&seq=4&orientation=landscape",
               },
-              {
+              {_id: "4",
                 title: "Web3 Marketing Specialist",
                 skills: ["Marketing", "Discord", "Web3"],
                 budget: "0.3-0.6 SOL",

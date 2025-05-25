@@ -18,6 +18,7 @@ interface Job { // This is the type used by JobDetailsModal internally and for i
   duration?: string;
 }
 
+
 interface JobDetailsModalProps {
   job: Job | null;
   visible: boolean;
