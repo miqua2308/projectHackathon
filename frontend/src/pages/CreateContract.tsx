@@ -14,7 +14,8 @@ import { useWallet } from "@solana/wallet-adapter-react";
 import { StarFilled } from "@ant-design/icons";
 import Navbar from "../components/Navbar";
 import WalletConnectionAlert from "../components/WalletConnectionAlert";
-import proposalService, { type ProposalFormData } from "../services/proposalService"; // Import proposal service
+import proposalService from "../services/proposalService";
+ // Import proposal service
 
 const { TextArea } = Input;
 const { Step } = Steps;
