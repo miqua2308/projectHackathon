@@ -207,7 +207,28 @@ const BrowseJob: React.FC = () => {
       );
     return matchesSearch && matchesSkills;
   });
-
+  const testAPI = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      
+      // Test API connection
+      console.log("Testing API connection...");
+      console.log("API URL:", import.meta.env.VITE_API_URL);
+      
+      const backendJobs = await jobService.browsejob();
+      console.log("API Response:", backendJobs);
+      
+      alert(`Successfully fetched ${backendJobs.length} jobs from API!`);
+    } catch (err: any) {
+      console.error("API Test Error:", err);
+      const errorMessage = err.response?.data?.message || err.message || "Unknown error";
+      setError(`API Test Failed: ${errorMessage}`);
+      alert(`API Test Failed: ${errorMessage}`);
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <div className="min-h-screen w-full bg-black">
       <Navbar />
@@ -222,6 +243,29 @@ const BrowseJob: React.FC = () => {
           image: job.image,
         }))}
       />
+          {/* Debug Section */}
+    <div className="py-4 bg-gray-900 w-full">
+      <div className="w-full px-4">
+        <div className="flex justify-center items-center gap-4">
+          <Button
+            type="primary"
+            onClick={testAPI}
+            className="!rounded-button bg-green-500 border-none hover:bg-green-600"
+            loading={loading}
+          >
+            Test API Connection
+          </Button>
+          <div className="text-white">
+            API URL: {import.meta.env.VITE_API_URL || 'Not set'}
+          </div>
+        </div>
+        {error && (
+          <div className="mt-4 text-center text-red-500 bg-red-100 p-2 rounded">
+            {error}
+          </div>
+        )}
+      </div>
+    </div>
 
       {/* Featured Jobs Section */}
       <div className="py-20 bg-white w-full">
