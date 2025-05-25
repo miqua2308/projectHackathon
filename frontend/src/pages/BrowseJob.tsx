@@ -255,27 +255,29 @@ const BrowseJob: React.FC = () => {
                     },
                   }}
                 >
-                  <h3 className="text-lg font-bold text-gray-900 mb-2">
-                    {job.title}
-                  </h3>
-                  <div className="flex flex-wrap gap-2 mb-3">
-                    {job.skills.map((skill: string, idx: number) => (
-                      <Tag
-                        key={idx}
-                        className="rounded-full px-3 py-1 bg-gray-100 text-gray-800"
-                      >
-                        {skill}
-                      </Tag>
-                    ))}
-                  </div>
-                  <div className="flex justify-between items-center mb-4">
-                    <div className="flex items-center text-gray-600">
-                      <i className="fas fa-coins text-yellow-500 mr-2 custom-green-icon"></i>
-                      {job.budgetDisplay}
+                  <div className="flex-grow">
+                    <h3 className="text-lg font-bold text-gray-900 mb-2">
+                      {job.title}
+                    </h3>
+                    <div className="flex flex-wrap gap-2 mb-3">
+                      {job.skills.map((skill: string, idx: number) => (
+                        <Tag
+                          key={idx}
+                          className="rounded-full px-3 py-1 bg-gray-100 text-gray-800"
+                        >
+                          {skill}
+                        </Tag>
+                      ))}
                     </div>
-                    <div className="flex items-center text-gray-600">
-                      <StarFilled className="text-yellow-500 mr-1" />
-                      {job.rating}
+                    <div className="flex justify-between items-center mb-4">
+                      <div className="flex items-center text-gray-600">
+                        <i className="fas fa-coins text-yellow-500 mr-2 custom-green-icon"></i>
+                        {job.budgetDisplay}
+                      </div>
+                      <div className="flex items-center text-gray-600">
+                        <StarFilled className="text-yellow-500 mr-1" />
+                        {job.rating}
+                      </div>
                     </div>
                   </div>
                   <Button
