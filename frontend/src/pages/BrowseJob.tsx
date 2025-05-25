@@ -208,50 +208,6 @@ const BrowseJob: React.FC = () => {
     return matchesSearch && matchesSkills;
   });
 
-  const testAPI = async () => {
-    try {
-      setLoading(true);
-      setError(null);
-      
-      // Log API configuration
-      const apiBaseUrl = import.meta.env.VITE_API_URL || 'https://projecthackathon-kvh3.onrender.com/api';
-      const fullApiUrl = `${apiBaseUrl}/jobs`;
-      
-      console.log("API Configuration:", {
-        baseUrl: apiBaseUrl,
-        fullUrl: fullApiUrl,
-        environment: import.meta.env.MODE
-      });
-      
-      // Test API connection
-      console.log("Making API request to:", fullApiUrl);
-      const backendJobs = await jobService.browsejob();
-      
-      const successMessage = `
-        API Test Success!
-        URL: ${fullApiUrl}
-        Jobs fetched: ${backendJobs.length}
-      `;
-      
-      console.log(successMessage);
-      alert(successMessage);
-    } catch (err: any) {
-      const errorDetails = `
-        API Test Failed!
-        URL: ${import.meta.env.VITE_API_URL}/jobs
-        Error: ${err.message}
-        Status: ${err.response?.status}
-        Response: ${JSON.stringify(err.response?.data, null, 2)}
-      `;
-      
-      console.error(errorDetails);
-      setError(errorDetails);
-      alert(errorDetails);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   return (
     <div className="min-h-screen w-full bg-black">
       <Navbar />
@@ -266,32 +222,6 @@ const BrowseJob: React.FC = () => {
           image: job.image,
         }))}
       />
-
-      {/* Debug Section */}
-      <div className="py-4 bg-gray-900 w-full">
-        <div className="w-full px-4">
-          <div className="flex flex-col items-center gap-4">
-            <Button
-              type="primary"
-              onClick={testAPI}
-              className="!rounded-button bg-green-500 border-none hover:bg-green-600"
-              loading={loading}
-            >
-              Test API Connection
-            </Button>
-            <div className="text-white text-center">
-              <div>Environment: {import.meta.env.MODE}</div>
-              <div>Base API URL: {import.meta.env.VITE_API_URL || 'Not set'}</div>
-              <div>Full Jobs API URL: {`${import.meta.env.VITE_API_URL || 'Not set'}/jobs`}</div>
-            </div>
-            {error && (
-              <div className="mt-4 text-center text-red-500 bg-red-100 p-4 rounded max-w-2xl whitespace-pre-wrap">
-                {error}
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
 
       {/* Featured Jobs Section */}
       <div className="py-20 bg-white w-full">
@@ -325,29 +255,27 @@ const BrowseJob: React.FC = () => {
                     },
                   }}
                 >
-                  <div className="flex-grow">
-                    <h3 className="text-lg font-bold text-gray-900 mb-2">
-                      {job.title}
-                    </h3>
-                    <div className="flex flex-wrap gap-2 mb-3">
-                      {job.skills.map((skill: string, idx: number) => (
-                        <Tag
-                          key={idx}
-                          className="rounded-full px-3 py-1 bg-gray-100 text-gray-800"
-                        >
-                          {skill}
-                        </Tag>
-                      ))}
+                  <h3 className="text-lg font-bold text-gray-900 mb-2">
+                    {job.title}
+                  </h3>
+                  <div className="flex flex-wrap gap-2 mb-3">
+                    {job.skills.map((skill: string, idx: number) => (
+                      <Tag
+                        key={idx}
+                        className="rounded-full px-3 py-1 bg-gray-100 text-gray-800"
+                      >
+                        {skill}
+                      </Tag>
+                    ))}
+                  </div>
+                  <div className="flex justify-between items-center mb-4">
+                    <div className="flex items-center text-gray-600">
+                      <i className="fas fa-coins text-yellow-500 mr-2 custom-green-icon"></i>
+                      {job.budgetDisplay}
                     </div>
-                    <div className="flex justify-between items-center mb-4">
-                      <div className="flex items-center text-gray-600">
-                        <i className="fas fa-coins text-yellow-500 mr-2 custom-green-icon"></i>
-                        {job.budgetDisplay}
-                      </div>
-                      <div className="flex items-center text-gray-600">
-                        <StarFilled className="text-yellow-500 mr-1" />
-                        {job.rating}
-                      </div>
+                    <div className="flex items-center text-gray-600">
+                      <StarFilled className="text-yellow-500 mr-1" />
+                      {job.rating}
                     </div>
                   </div>
                   <Button

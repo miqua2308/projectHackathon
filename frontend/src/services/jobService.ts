@@ -55,8 +55,13 @@ const transformJobData = (data: JobFormData): any => {
 const jobService = {
   // Browse jobs (fetch from backend)
   browsejob: async (): Promise<Job[]> => {
-    const response: AxiosResponse<Job[]> = await api.get('/jobs');
-    return response.data;
+    try {
+      const response: AxiosResponse<Job[]> = await api.get('/jobs');
+      return response.data;
+    } catch (error: any) {
+      console.error('Error fetching jobs:', error);
+      throw error;
+    }
   },
 
   // Get all jobs
