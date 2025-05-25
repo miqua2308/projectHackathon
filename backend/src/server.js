@@ -23,7 +23,9 @@ const allowedOrigins = [
   process.env.CLIENT_URL || "http://localhost:3000",
   "http://localhost:5173",
   "https://project-hackathon-kxde-miqua2004s-projects.vercel.app",
-  "https://project-hackathon-kxde-miqua2004s-projects.vercel.app/*"
+  "https://project-hackathon-kxde-miqua2004s-projects.vercel.app/*",
+  "https://project-hackathon-kxde.vercel.app/",
+  "https://project-hackathon-kxde.vercel.app/*"
 ];
 app.use(
   cors({
