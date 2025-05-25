@@ -207,28 +207,51 @@ const BrowseJob: React.FC = () => {
       );
     return matchesSearch && matchesSkills;
   });
+
   const testAPI = async () => {
     try {
       setLoading(true);
       setError(null);
       
+      // Log API configuration
+      const apiBaseUrl = import.meta.env.VITE_API_URL || 'https://projecthackathon-kvh3.onrender.com/api';
+      const fullApiUrl = `${apiBaseUrl}/jobs`;
+      
+      console.log("API Configuration:", {
+        baseUrl: apiBaseUrl,
+        fullUrl: fullApiUrl,
+        environment: import.meta.env.MODE
+      });
+      
       // Test API connection
-      console.log("Testing API connection...");
-      console.log("API URL:", import.meta.env.VITE_API_URL);
-      
+      console.log("Making API request to:", fullApiUrl);
       const backendJobs = await jobService.browsejob();
-      console.log("API Response:", backendJobs);
       
-      alert(`Successfully fetched ${backendJobs.length} jobs from API!`);
+      const successMessage = `
+        API Test Success!
+        URL: ${fullApiUrl}
+        Jobs fetched: ${backendJobs.length}
+      `;
+      
+      console.log(successMessage);
+      alert(successMessage);
     } catch (err: any) {
-      console.error("API Test Error:", err);
-      const errorMessage = err.response?.data?.message || err.message || "Unknown error";
-      setError(`API Test Failed: ${errorMessage}`);
-      alert(`API Test Failed: ${errorMessage}`);
+      const errorDetails = `
+        API Test Failed!
+        URL: ${import.meta.env.VITE_API_URL}/jobs
+        Error: ${err.message}
+        Status: ${err.response?.status}
+        Response: ${JSON.stringify(err.response?.data, null, 2)}
+      `;
+      
+      console.error(errorDetails);
+      setError(errorDetails);
+      alert(errorDetails);
     } finally {
       setLoading(false);
     }
   };
+
   return (
     <div className="min-h-screen w-full bg-black">
       <Navbar />
@@ -243,29 +266,32 @@ const BrowseJob: React.FC = () => {
           image: job.image,
         }))}
       />
-          {/* Debug Section */}
-    <div className="py-4 bg-gray-900 w-full">
-      <div className="w-full px-4">
-        <div className="flex justify-center items-center gap-4">
-          <Button
-            type="primary"
-            onClick={testAPI}
-            className="!rounded-button bg-green-500 border-none hover:bg-green-600"
-            loading={loading}
-          >
-            Test API Connection
-          </Button>
-          <div className="text-white">
-            API URL: {import.meta.env.VITE_API_URL || 'Not set'}
+
+      {/* Debug Section */}
+      <div className="py-4 bg-gray-900 w-full">
+        <div className="w-full px-4">
+          <div className="flex flex-col items-center gap-4">
+            <Button
+              type="primary"
+              onClick={testAPI}
+              className="!rounded-button bg-green-500 border-none hover:bg-green-600"
+              loading={loading}
+            >
+              Test API Connection
+            </Button>
+            <div className="text-white text-center">
+              <div>Environment: {import.meta.env.MODE}</div>
+              <div>Base API URL: {import.meta.env.VITE_API_URL || 'Not set'}</div>
+              <div>Full Jobs API URL: {`${import.meta.env.VITE_API_URL || 'Not set'}/jobs`}</div>
+            </div>
+            {error && (
+              <div className="mt-4 text-center text-red-500 bg-red-100 p-4 rounded max-w-2xl whitespace-pre-wrap">
+                {error}
+              </div>
+            )}
           </div>
         </div>
-        {error && (
-          <div className="mt-4 text-center text-red-500 bg-red-100 p-2 rounded">
-            {error}
-          </div>
-        )}
       </div>
-    </div>
 
       {/* Featured Jobs Section */}
       <div className="py-20 bg-white w-full">
