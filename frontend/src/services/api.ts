@@ -2,7 +2,7 @@ import axios from 'axios';
 import type { InternalAxiosRequestConfig, AxiosResponse, AxiosError } from 'axios';
 
 // Define the base URL for API requests
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://project-hackathon-cjsh-gr8u0c3x2-miqua2004s-projects.vercel.app/api';
 
 // Create an axios instance with default config
 const api = axios.create({
